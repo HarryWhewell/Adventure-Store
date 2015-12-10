@@ -1,0 +1,23 @@
+{
+  "name": "AdventureStore",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "angular-route": "^1.4.8",
+    "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-live-server": "0.0.29",
+    "gulp-watch": "^4.3.5",
+    "passport": "^0.3.2",
+    "sequelize": "^3.14.2"
+  }
+}

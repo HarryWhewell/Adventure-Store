@@ -1,0 +1,21 @@
+{
+  "name": "AdventureStore",
+  "description": "Onile Store For Adventures",
+  "main": "index.js",
+  "authors": [
+    "Harry Whewell <harry.whewell@myfuturesbright.co.uk>"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
