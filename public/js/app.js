@@ -1,4 +1,5 @@
 /**
+ * angular/app.js
  * Created by HWhewell on 07/12/2015.
  */
 (function(){
@@ -17,6 +18,7 @@
     angular.module('app.config', ['ngRoute']);
 }());
 /**
+ * angular/routes.js
  * Created by HWhewell on 07/12/2015.
  */
 (function(){
@@ -39,20 +41,12 @@
     }
 }());
 /**
- * Created by HWhewell on 07/12/2015.
+ * angular/services/CrudService.js
+ * Created by HWhewell on 11/12/2015.
  */
-(function(){
 
-    angular
-        .module('app.controllers')
-        .controller('HomeController', HomeController);
-
-    function HomeController(){
-        var vm = this;
-    }
-
-}());
 /**
+ * angular/app/login/login.js
  * Created by HWhewell on 07/12/2015.
  */
 (function(){
@@ -62,6 +56,21 @@
         .controller('LoginController', LoginController);
 
     function LoginController(){
+        var vm = this;
+    }
+
+}());
+/**
+ * angular/app/home/home.js
+ * Created by HWhewell on 07/12/2015.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('HomeController', HomeController);
+
+    function HomeController(){
         var vm = this;
     }
 
