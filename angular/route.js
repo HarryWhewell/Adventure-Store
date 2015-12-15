@@ -19,5 +19,18 @@
                 templateUrl: 'public/views/login/login.html',
                 controller: 'LoginController as vm'
             })
+            .when('/weapons',{
+                templateUrl: 'public/views/weapons/weapon.html',
+                controller: 'WeaponController as vm'
+            })
+            .when('/apparel',{
+                templateUrl: 'public/views/apparel/apparel.html',
+                controller: 'ApparelController as vm'
+            })
+            .when('/spells',{
+                templateUrl: 'public/views/spells/spell.html',
+                controller: 'SpellController as vm'
+            })
+
     }
 }());
