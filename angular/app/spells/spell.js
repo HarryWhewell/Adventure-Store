@@ -8,8 +8,18 @@
         .module('app.controllers')
         .controller('SpellController', SpellController);
 
-    function SpellController(){
+    SpellController.$inject = ['SpellService'];
+
+    function SpellController(SpellService){
         var vm = this;
+
+        vm.response = vm.getSpells;
+
+        vm.getSpells = SpellService.getAllSpells(function(success){
+            vm.response = success.data;
+        },function(error){
+            vm.response = error;
+        });
     }
 
 }());

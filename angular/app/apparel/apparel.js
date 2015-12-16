@@ -8,8 +8,18 @@
         .module('app.controllers')
         .controller('ApparelController', ApparelController);
 
-    function ApparelController(){
+    ApparelController.$inject = ['ApparelService'];
+
+    function ApparelController(ApparelService){
         var vm = this;
+
+        vm.response = vm.getApparel;
+
+        vm.getApparel = ApparelService.getAllApparel(function(success){
+            vm.response = success.data;
+        },function(error){
+            vm.response = error;
+        });
     }
 
 }());

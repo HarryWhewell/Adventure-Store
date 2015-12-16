@@ -8,8 +8,18 @@
         .module('app.controllers')
         .controller('WeaponController', WeaponController);
 
-    function WeaponController(){
+    WeaponController.$inject = ['WeaponService'];
+
+    function WeaponController(WeaponService){
         var vm = this;
+
+        vm.response = vm.getWeapons;
+
+        vm.getWeapons = WeaponService.getAllWeapons(function(success){
+            vm.response = success.data;
+        },function(error){
+            vm.response = error;
+        });
     }
 
 }());
