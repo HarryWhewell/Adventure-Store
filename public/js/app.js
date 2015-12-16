@@ -54,6 +54,29 @@
     }
 }());
 /**
+ * app/services/ApparelService.js
+ * Created by HWhewell on 15/12/2015.
+ */
+(function(){
+
+    angular
+        .module('app.services')
+        .service('ApparelService', ApparelService);
+
+    ApparelService.$inject = ['CrudService'];
+
+    function ApparelService(CrudService){
+        var apparelService = {};
+
+        // get all spells
+        apparelService.getAllApparel = function(success, error){
+            return CrudService.getRequest('/localhost:8080/api/apparel/', success, error);
+        };
+
+        return apparelService;
+    }
+}());
+/**
  * angular/services/CrudService.js
  * Created by HWhewell on 11/12/2015.
  */
@@ -109,10 +132,74 @@
 
 
 /**
+ * app/services/ReviewService.js
+ * Created by HWhewell on 15/12/2015.
+ */
+(function(){
+
+    angular
+        .module('app.services')
+        .service('ReviewService', ReviewService);
+
+    ReviewService.$inject = ['CrudService'];
+
+    function ReviewService(CrudService){
+        var reviewService = {};
+
+        // get all spells
+        reviewService.getAllReviews = function(success, error){
+            return CrudService.getRequest('/localhost:8080/api/reviews/', success, error);
+        };
+
+        return reviewService;
+    }
+}());
+/**
+ * app/services/SpellService.js
+ * Created by HWhewell on 15/12/2015.
+ */
+(function(){
+
+    angular
+        .module('app.services')
+        .service('SpellService', SpellService);
+
+    SpellService.$inject = ['CrudService'];
+
+    function SpellService(CrudService){
+        var spellService = {};
+
+        // get all spells
+        spellService.getAllSpells = function(success, error){
+            return CrudService.getRequest('/localhost:8080/api/spells/', success, error);
+        };
+
+        return spellService;
+    }
+}());
+/**
  * angular/services/WeaponService.js
  * Created by HWhewell on 15/12/2015.
  */
+(function(){
 
+    angular
+        .module('app.services')
+        .service('WeaponService', WeaponService);
+
+    WeaponService.$inject = ['CrudService'];
+
+    function WeaponService(CrudService){
+        var weaponService = {};
+
+        // get all weapons
+        weaponService.getAllWeapons = function(success, error){
+            return CrudService.getRequest('/localhost:8080/api/weapons/', success, error);
+        };
+
+        return weaponService;
+    }
+}());
 /**
  * angular/app/apparel/apparel.js
  * Created by HWhewell on 15/12/2015.

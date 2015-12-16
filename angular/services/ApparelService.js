@@ -1,5 +1,5 @@
 /**
- * app/services/ApparelService.js
+ * angular/services/ApparelService.js
  * Created by HWhewell on 15/12/2015.
  */
 (function(){
@@ -13,10 +13,12 @@
     function ApparelService(CrudService){
         var apparelService = {};
 
-        // get all spells
+        // get all apparel
         apparelService.getAllApparel = function(success, error){
             return CrudService.getRequest('/localhost:8080/api/apparel/', success, error);
         };
+
+
 
         return apparelService;
     }

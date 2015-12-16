@@ -1,5 +1,5 @@
 /**
- * app/services/SpellService.js
+ * angular/services/SpellService.js
  * Created by HWhewell on 15/12/2015.
  */
 (function(){
