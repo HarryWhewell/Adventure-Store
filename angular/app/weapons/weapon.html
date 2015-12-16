@@ -1,2 +1,35 @@
-<h1>Weapons</h1>
-<p>{{vm.response}}</p>
+<center><h1>Weapons</h1></center>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 side-panel">
+            <br>
+            <p><b>Refine By:</b></p>
+            <hr>
+            <h4>Type</h4>
+            <div class="list-group">
+                <a href="#" class="list-group-item">Warrior</a>
+                <a href="#" class="list-group-item">Range</a>
+                <a href="#" class="list-group-item">Mage</a>
+            </div>
+            <h4>Price</h4>
+            <!--TODO jquery value slider-->
+            <h4>Damage</h4>
+            <!--TODO jquery value slider-->
+            <h4>Rating</h4>
+            <!--TODO angular rating filter-->
+        </div>
+        <div class="col-md-9">
+            <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="weapon in vm.weaponList">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/320x150" alt="">
+                    <div class="caption">
+                        <h4 class="pull-right">{{weapon.price | currency :"£" }}</h4>
+                        <h4>{{weapon.name}}</h4>
+                        <p>{{weapon.desc}}</p>
+                        <em class="pull-right">Damage: {{weapon.damage}}</em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

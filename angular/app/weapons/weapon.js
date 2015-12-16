@@ -13,12 +13,12 @@
     function WeaponController(WeaponService){
         var vm = this;
 
-        vm.response = vm.getWeapons;
+        vm.weaponList = vm.getWeapons;
 
         vm.getWeapons = WeaponService.getAllWeapons(function(success){
-            vm.response = success.data;
+            vm.weaponList = success.data;
         },function(error){
-            vm.response = error;
+            vm.weaponList = error;
         });
     }
 

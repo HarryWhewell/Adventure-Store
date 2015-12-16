@@ -354,12 +354,12 @@
     function ApparelController(ApparelService){
         var vm = this;
 
-        vm.response = vm.getApparel;
+        vm.apparelList = vm.getApparel;
 
         vm.getApparel = ApparelService.getAllApparel(function(success){
-            vm.response = success.data;
+            vm.apparelList = success.data;
         },function(error){
-            vm.response = error;
+            vm.apparelList = error;
         });
     }
 
@@ -409,12 +409,12 @@
     function SpellController(SpellService){
         var vm = this;
 
-        vm.response = vm.getSpells;
+        vm.spellList = vm.getSpells;
 
         vm.getSpells = SpellService.getAllSpells(function(success){
-            vm.response = success.data;
+            vm.spellList = success.data;
         },function(error){
-            vm.response = error;
+            vm.spellList = error;
         });
     }
 
@@ -434,12 +434,12 @@
     function WeaponController(WeaponService){
         var vm = this;
 
-        vm.response = vm.getWeapons;
+        vm.weaponList = vm.getWeapons;
 
         vm.getWeapons = WeaponService.getAllWeapons(function(success){
-            vm.response = success.data;
+            vm.weaponList = success.data;
         },function(error){
-            vm.response = error;
+            vm.weaponList = error;
         });
     }
 

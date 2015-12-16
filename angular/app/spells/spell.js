@@ -13,12 +13,12 @@
     function SpellController(SpellService){
         var vm = this;
 
-        vm.response = vm.getSpells;
+        vm.spellList = vm.getSpells;
 
         vm.getSpells = SpellService.getAllSpells(function(success){
-            vm.response = success.data;
+            vm.spellList = success.data;
         },function(error){
-            vm.response = error;
+            vm.spellList = error;
         });
     }
 

@@ -13,12 +13,12 @@
     function ApparelController(ApparelService){
         var vm = this;
 
-        vm.response = vm.getApparel;
+        vm.apparelList = vm.getApparel;
 
         vm.getApparel = ApparelService.getAllApparel(function(success){
-            vm.response = success.data;
+            vm.apparelList = success.data;
         },function(error){
-            vm.response = error;
+            vm.apparelList = error;
         });
     }
 
