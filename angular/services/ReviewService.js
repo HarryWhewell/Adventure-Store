@@ -28,6 +28,11 @@
             return CrudService.getRequest('http://localhost:8080/api/reviews/' + id, success, error);
         };
 
+        // get review by product ref
+        reviewService.getReviewByProductRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/reviews/product/' + ref, success, error);
+        };
+
         // update review by id
         reviewService.updateReviewById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/reviews/' + id, data, success, error);

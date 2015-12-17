@@ -23,17 +23,17 @@
             return CrudService.postRequest('http://localhost:8080/api/orders/', data, success, error);
         };
 
-        // get orders
+        // get orders by id
         orderService.getOrderById = function(id, success, error){
             return CrudService.getRequest('http://localhost:8080/api/orders/' + id, success, error);
         };
 
-        // update orders
+        // update orders by id
         orderService.updateOrderById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/orders/' + id, data, success, error);
         };
 
-        // delete orders
+        // delete orders by id
         orderService.deleteOrderById = function(id, success, error){
             return CrudService.deleteRequest('http://localhost:8080/api/orders/' + id, success, error);
         };

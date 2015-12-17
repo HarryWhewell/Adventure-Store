@@ -28,6 +28,11 @@
             return CrudService.getRequest('http://localhost:8080/api/apparel/' + id, success, error);
         };
 
+        // get apparel by ref
+        apparelService.getApparelByRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/apparel/product/' + ref, success, error);
+        };
+
         // update apparel by id
         apparelService.updateApparelById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/apparel/' + id, data, success, error);

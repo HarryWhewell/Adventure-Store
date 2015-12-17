@@ -28,6 +28,11 @@
             return CrudService.getRequest('http://localhost:8080/api/users/' + id, success, error);
         };
 
+        // get user by email
+        userService.getReviewByProductRef = function(email, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/users/email/' + email, success, error);
+        };
+
         // update user by id
         userService.updateUserById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/users/' + id, data, success, error);

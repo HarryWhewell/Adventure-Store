@@ -28,6 +28,11 @@
             return CrudService.getRequest('http://localhost:8080/api/weapons/' + id, success, error);
         };
 
+        // get weapon by ref
+        weaponService.getReviewByProductRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/weapons/product/' + ref, success, error);
+        };
+
         // update weapon by id
         weaponService.updateWeaponById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/weapons/' + id, data, success, error);

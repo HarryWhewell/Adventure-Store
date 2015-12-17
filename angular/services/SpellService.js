@@ -28,6 +28,11 @@
             return CrudService.getRequest('http://localhost:8080/api/spells/' + id, success, error);
         };
 
+        // get spell by ref
+        spellService.getReviewByProductRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/spells/product/' + ref, success, error);
+        };
+
         // update spell by id
         spellService.updateSpellById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/spells/' + id, data, success, error);
