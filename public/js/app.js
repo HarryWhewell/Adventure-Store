@@ -83,6 +83,11 @@
             return CrudService.getRequest('http://localhost:8080/api/apparel/' + id, success, error);
         };
 
+        // get apparel by ref
+        apparelService.getApparelByRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/apparel/product/' + ref, success, error);
+        };
+
         // update apparel by id
         apparelService.updateApparelById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/apparel/' + id, data, success, error);
@@ -168,6 +173,92 @@
 
 
 /**
+ * angular/app/services/OrderDetailsService.js
+ * Created by HWhewell on 17/12/2015.
+ */
+(function(){
+
+    angular
+        .module('app.services')
+        .service('OrderDetailsService', OrderDetailsService);
+
+    OrderDetailsService.$inject = ['CrudService'];
+
+    function OrderDetailsService(CrudService){
+        var orderDetailsService = {};
+
+        // get all order details
+        orderDetailsService.getAllOrderDetails = function(success, error){
+            return CrudService.getRequest('http://localhost:8080/api/order-details/', success, error);
+        };
+
+        // create order details
+        orderDetailsService.createOrderDetails = function(data, success, error){
+            return CrudService.postRequest('http://localhost:8080/api/order-details/', data, success, error);
+        };
+
+        // get order details by id
+        orderDetailsService.getOrderDetailsById = function(id, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/order-details/' + id, success, error);
+        };
+
+        // update order details by id
+        orderDetailsService.updateOrderDetailsById = function(id, data, success, error){
+            return CrudService.putRequest('http://localhost:8080/api/order-details/' + id, data, success, error);
+        };
+
+        // delete order details by id
+        orderDetailsService.deleteOrderDetailsById = function(id, success, error){
+            return CrudService.deleteRequest('http://localhost:8080/api/order-details/' + id, success, error);
+        };
+
+        return orderDetailsService;
+    }
+}());
+/**
+ * angular/app/services/OrderService.js
+ * Created by HWhewell on 17/12/2015.
+ */
+(function(){
+
+    angular
+        .module('app.services')
+        .service('OrderService', OrderService);
+
+    OrderService.$inject = ['CrudService'];
+
+    function OrderService(CrudService){
+        var orderService = {};
+
+        // get all orders
+        orderService.getAllOrders = function(success, error){
+            return CrudService.getRequest('http://localhost:8080/api/orders/', success, error);
+        };
+
+        // create orders
+        orderService.createOrder = function(data, success, error){
+            return CrudService.postRequest('http://localhost:8080/api/orders/', data, success, error);
+        };
+
+        // get orders by id
+        orderService.getOrderById = function(id, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/orders/' + id, success, error);
+        };
+
+        // update orders by id
+        orderService.updateOrderById = function(id, data, success, error){
+            return CrudService.putRequest('http://localhost:8080/api/orders/' + id, data, success, error);
+        };
+
+        // delete orders by id
+        orderService.deleteOrderById = function(id, success, error){
+            return CrudService.deleteRequest('http://localhost:8080/api/orders/' + id, success, error);
+        };
+
+        return orderService;
+    }
+}());
+/**
  * angular/services/ReviewService.js
  * Created by HWhewell on 15/12/2015.
  */
@@ -195,6 +286,11 @@
         // get review by id
         reviewService.getReviewById = function(id, success, error){
             return CrudService.getRequest('http://localhost:8080/api/reviews/' + id, success, error);
+        };
+
+        // get review by product ref
+        reviewService.getReviewByProductRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/reviews/product/' + ref, success, error);
         };
 
         // update review by id
@@ -240,6 +336,11 @@
             return CrudService.getRequest('http://localhost:8080/api/spells/' + id, success, error);
         };
 
+        // get spell by ref
+        spellService.getReviewByProductRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/spells/product/' + ref, success, error);
+        };
+
         // update spell by id
         spellService.updateSpellById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/spells/' + id, data, success, error);
@@ -281,6 +382,11 @@
         // get user by id
         userService.getUserById = function(id, success, error){
             return CrudService.getRequest('http://localhost:8080/api/users/' + id, success, error);
+        };
+
+        // get user by email
+        userService.getReviewByProductRef = function(email, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/users/email/' + email, success, error);
         };
 
         // update user by id
@@ -326,6 +432,11 @@
             return CrudService.getRequest('http://localhost:8080/api/weapons/' + id, success, error);
         };
 
+        // get weapon by ref
+        weaponService.getReviewByProductRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/weapons/product/' + ref, success, error);
+        };
+
         // update weapon by id
         weaponService.updateWeaponById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/weapons/' + id, data, success, error);
@@ -339,6 +450,11 @@
         return weaponService;
     }
 }());
+/**
+ * angular/app/admin/admin.js
+ * Created by HWhewell on 16/12/2015.
+ */
+
 /**
  * angular/app/apparel/apparel.js
  * Created by HWhewell on 15/12/2015.
@@ -379,6 +495,11 @@
     }
 
 }());
+/**
+ * angular/app/item/item.js
+ * Created by HWhewell on 04/01/2016.
+ */
+
 /**
  * angular/app/login/login.js
  * Created by HWhewell on 07/12/2015.

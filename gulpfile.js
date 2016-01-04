@@ -49,9 +49,10 @@ gulp.task('serve', function(){
     })
 });
 
-// gulp task to watch for any changes to all the js files in the
-// angular folder, if there are any changes 'scripts' is ran
+// gulp task to watch for any changes to all the
+// js files and the html files in the app folder,
+// if there are any changes 'scripts' and 'views' is ran
 gulp.task('watch', function(){
     gulp.watch(angularFiles, ['scripts']);
-
+    gulp.watch(htmlFiles, ['views']);
 });
