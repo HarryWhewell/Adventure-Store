@@ -42,7 +42,7 @@
                 templateUrl: 'public/views/weapons/weapon.html',
                 controller: 'WeaponController as vm'
             })
-            .when('/weapons/item/:itemRef',{
+            .when('/weapons/:weaponId',{
                 templateUrl: 'public/views/weaponItem/weaponItem.html',
                 controller: 'WeaponItemController as vm'
             })
@@ -62,7 +62,7 @@
                 controller: 'SpellController as vm'
             })
 
-            .when('/spells/item/:itemRef',{
+            .when('/spells/:spellId',{
                 templateUrl: 'public/views/spellItem/spellItem.html',
                 controller: 'SpellItemController as vm'
             })
@@ -437,7 +437,7 @@
         weaponService.getWeaponById = function(id, success, error){
             return CrudService.getRequest('http://localhost:8080/api/weapons/' + id, success, error);
         };
-        
+
         // update weapon by id
         weaponService.updateWeaponById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/weapons/' + id, data, success, error);
@@ -482,25 +482,32 @@
 
 }());
 /**
+ * angular/app/apparelItem/apparelItem.js
  * Created by HWhewell on 05/01/2016.
  */
 (function(){
 
     angular
         .module('app.controllers')
-        .controller('ApparelItemController' ,ApparelItemController);
+        .controller('ApparelItemController', ApparelItemController);
 
-    ApparelItemController.$inject = ['ApparelService'];
+    ApparelItemController.$inject = ['$routeParams','ApparelService'];
 
-    function ApparelItemController($routeParams , ApparelService) {
+    function ApparelItemController($routeParams, ApparelService) {
         var vm = this;
 
         vm.item_id = $routeParams.apparelId;
 
-        vm.apparel = vm.getApparel;
-
         vm.getApparel = ApparelService.getApparelById(vm.item_id, function(success){
             vm.getApparel = success.data;
+
+            vm.apparelType = vm.getApparel.type;
+            vm.apparelName = vm.getApparel.name;
+            vm.apparelDesc = vm.getApparel.desc;
+            vm.apparelArmour = vm.getApparel.armour;
+            vm.apparelPrice = vm.getApparel.price;
+            vm.apparelQuantity = vm.getApparel.quantity;
+
         },function(error){
             vm.getApparel = error;
         });
@@ -563,13 +570,25 @@
         .module('app.controllers')
         .controller('SpellItemController', SpellItemController);
 
-    SpellItemController.$inject = ['SpellService'];
+    SpellItemController.$inject = ['$routeParams','SpellService'];
 
-    function SpellItemController(SpellService, $routeParams) {
+    function SpellItemController($routeParams, SpellService) {
         var vm = this;
 
-        vm.item_ref = $routeParams.itemRef;
+        vm.item_id = $routeParams.spellId;
 
+        vm.getSpell = SpellService.getSpellById(vm.item_id, function(success){
+            vm.getSpell = success.data;
+
+            vm.spellName = vm.getSpell.name;
+            vm.spellDesc = vm.getSpell.desc;
+            vm.spellEffect = vm.getSpell.effect;
+            vm.spellPrice = vm.getSpell.price;
+            vm.spellQuantity = vm.getSpell.quantity;
+
+        },function(error){
+            vm.getSpell = error;
+        });
     }
 
 }());
@@ -599,6 +618,7 @@
 
 }());
 /**
+ * angular/app/weaponItem/weaponItem.js
  * Created by HWhewell on 05/01/2016.
  */
 (function(){
@@ -607,13 +627,26 @@
         .module('app.controllers')
         .controller('WeaponItemController', WeaponItemController);
 
-    WeaponItemController.$inject = ['WeaponService'];
+    WeaponItemController.$inject = ['$routeParams', 'WeaponService'];
 
-    function WeaponItemController(WeaponController, $routeParams) {
+    function WeaponItemController($routeParams, WeaponService) {
         var vm = this;
 
-        vm.item_ref = $routeParams.itemRef;
+        vm.item_id = $routeParams.weaponId;
 
+        vm.getWeapon = WeaponService.getWeaponById(vm.item_id, function(success){
+            vm.getWeapon = success.data;
+
+            vm.weaponType = vm.getWeapon.type;
+            vm.weaponName = vm.getWeapon.name;
+            vm.weaponDesc = vm.getWeapon.desc;
+            vm.weaponArmour = vm.getWeapon.damage;
+            vm.weaponPrice = vm.getWeapon.price;
+            vm.weaponQuantity = vm.getWeapon.quantity;
+
+        },function(error){
+            vm.getWeapon = error;
+        });
     }
 
 }());

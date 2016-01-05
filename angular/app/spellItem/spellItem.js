@@ -8,13 +8,25 @@
         .module('app.controllers')
         .controller('SpellItemController', SpellItemController);
 
-    SpellItemController.$inject = ['SpellService'];
+    SpellItemController.$inject = ['$routeParams','SpellService'];
 
-    function SpellItemController(SpellService, $routeParams) {
+    function SpellItemController($routeParams, SpellService) {
         var vm = this;
 
-        vm.item_ref = $routeParams.itemRef;
+        vm.item_id = $routeParams.spellId;
 
+        vm.getSpell = SpellService.getSpellById(vm.item_id, function(success){
+            vm.getSpell = success.data;
+
+            vm.spellName = vm.getSpell.name;
+            vm.spellDesc = vm.getSpell.desc;
+            vm.spellEffect = vm.getSpell.effect;
+            vm.spellPrice = vm.getSpell.price;
+            vm.spellQuantity = vm.getSpell.quantity;
+
+        },function(error){
+            vm.getSpell = error;
+        });
     }
 
 }());

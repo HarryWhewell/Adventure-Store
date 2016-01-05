@@ -23,7 +23,7 @@
                 templateUrl: 'public/views/weapons/weapon.html',
                 controller: 'WeaponController as vm'
             })
-            .when('/weapons/item/:itemRef',{
+            .when('/weapons/:weaponId',{
                 templateUrl: 'public/views/weaponItem/weaponItem.html',
                 controller: 'WeaponItemController as vm'
             })
@@ -43,7 +43,7 @@
                 controller: 'SpellController as vm'
             })
 
-            .when('/spells/item/:itemRef',{
+            .when('/spells/:spellId',{
                 templateUrl: 'public/views/spellItem/spellItem.html',
                 controller: 'SpellItemController as vm'
             })
