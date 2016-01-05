@@ -14,14 +14,16 @@
         </div>
         <div class="col-md-9">
             <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="spell in vm.spellList">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/320x150" alt="">
-                    <div class="caption">
-                        <h4 class="pull-right">{{spell.price | currency :"£" }}</h4>
-                        <h4>{{spell.name}}</h4>
-                        <p>{{spell.desc}}</p>
+                <a ng-href="#/spells/item/{{spell.ref}}">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/320x150" alt="">
+                        <div class="caption">
+                            <h4 class="pull-right">{{spell.price | currency :"£" }}</h4>
+                            <h4>{{spell.name}}</h4>
+                            <p>{{spell.desc}}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>

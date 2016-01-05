@@ -42,13 +42,29 @@
                 templateUrl: 'public/views/weapons/weapon.html',
                 controller: 'WeaponController as vm'
             })
+            .when('/weapons/item/:itemRef',{
+                templateUrl: 'public/views/weaponItem/weaponItem.html',
+                controller: 'WeaponItemController as vm'
+            })
+
             .when('/apparel',{
                 templateUrl: 'public/views/apparel/apparel.html',
                 controller: 'ApparelController as vm'
             })
+
+            .when('/apparel/:apparelId',{
+                templateUrl: 'public/views/apparelItem/apparelItem.html',
+                controller: 'ApparelItemController as vm'
+            })
+
             .when('/spells',{
                 templateUrl: 'public/views/spells/spell.html',
                 controller: 'SpellController as vm'
+            })
+
+            .when('/spells/item/:itemRef',{
+                templateUrl: 'public/views/spellItem/spellItem.html',
+                controller: 'SpellItemController as vm'
             })
 
     }
@@ -81,11 +97,6 @@
         // get apparel by id
         apparelService.getApparelById = function(id, success, error){
             return CrudService.getRequest('http://localhost:8080/api/apparel/' + id, success, error);
-        };
-
-        // get apparel by ref
-        apparelService.getApparelByRef = function(ref, success, error){
-            return CrudService.getRequest('http://localhost:8080/api/apparel/product/' + ref, success, error);
         };
 
         // update apparel by id
@@ -336,11 +347,6 @@
             return CrudService.getRequest('http://localhost:8080/api/spells/' + id, success, error);
         };
 
-        // get spell by ref
-        spellService.getReviewByProductRef = function(ref, success, error){
-            return CrudService.getRequest('http://localhost:8080/api/spells/product/' + ref, success, error);
-        };
-
         // update spell by id
         spellService.updateSpellById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/spells/' + id, data, success, error);
@@ -431,12 +437,7 @@
         weaponService.getWeaponById = function(id, success, error){
             return CrudService.getRequest('http://localhost:8080/api/weapons/' + id, success, error);
         };
-
-        // get weapon by ref
-        weaponService.getReviewByProductRef = function(ref, success, error){
-            return CrudService.getRequest('http://localhost:8080/api/weapons/product/' + ref, success, error);
-        };
-
+        
         // update weapon by id
         weaponService.updateWeaponById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/weapons/' + id, data, success, error);
@@ -481,6 +482,32 @@
 
 }());
 /**
+ * Created by HWhewell on 05/01/2016.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('ApparelItemController' ,ApparelItemController);
+
+    ApparelItemController.$inject = ['ApparelService'];
+
+    function ApparelItemController($routeParams , ApparelService) {
+        var vm = this;
+
+        vm.item_id = $routeParams.apparelId;
+
+        vm.apparel = vm.getApparel;
+
+        vm.getApparel = ApparelService.getApparelById(vm.item_id, function(success){
+            vm.getApparel = success.data;
+        },function(error){
+            vm.getApparel = error;
+        });
+    }
+
+}());
+/**
  * angular/app/home/home.js
  * Created by HWhewell on 07/12/2015.
  */
@@ -496,11 +523,6 @@
 
 }());
 /**
- * angular/app/item/item.js
- * Created by HWhewell on 04/01/2016.
- */
-
-/**
  * angular/app/login/login.js
  * Created by HWhewell on 07/12/2015.
  */
@@ -512,6 +534,42 @@
 
     function LoginController(){
         var vm = this;
+    }
+
+}());
+/**
+ * angular/app/order/order.js
+ * Created by HWhewell on 04/01/2016.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('OrderController', OrderController);
+
+    function OrderController() {
+        var vm = this;
+
+    }
+
+}());
+/**
+ * angular/app/spellItem/spellItem.js
+ * Created by HWhewell on 04/01/2016.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('SpellItemController', SpellItemController);
+
+    SpellItemController.$inject = ['SpellService'];
+
+    function SpellItemController(SpellService, $routeParams) {
+        var vm = this;
+
+        vm.item_ref = $routeParams.itemRef;
+
     }
 
 }());
@@ -537,6 +595,25 @@
         },function(error){
             vm.spellList = error;
         });
+    }
+
+}());
+/**
+ * Created by HWhewell on 05/01/2016.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('WeaponItemController', WeaponItemController);
+
+    WeaponItemController.$inject = ['WeaponService'];
+
+    function WeaponItemController(WeaponController, $routeParams) {
+        var vm = this;
+
+        vm.item_ref = $routeParams.itemRef;
+
     }
 
 }());

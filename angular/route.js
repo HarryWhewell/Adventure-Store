@@ -23,13 +23,29 @@
                 templateUrl: 'public/views/weapons/weapon.html',
                 controller: 'WeaponController as vm'
             })
+            .when('/weapons/item/:itemRef',{
+                templateUrl: 'public/views/weaponItem/weaponItem.html',
+                controller: 'WeaponItemController as vm'
+            })
+
             .when('/apparel',{
                 templateUrl: 'public/views/apparel/apparel.html',
                 controller: 'ApparelController as vm'
             })
+
+            .when('/apparel/:apparelId',{
+                templateUrl: 'public/views/apparelItem/apparelItem.html',
+                controller: 'ApparelItemController as vm'
+            })
+
             .when('/spells',{
                 templateUrl: 'public/views/spells/spell.html',
                 controller: 'SpellController as vm'
+            })
+
+            .when('/spells/item/:itemRef',{
+                templateUrl: 'public/views/spellItem/spellItem.html',
+                controller: 'SpellItemController as vm'
             })
 
     }

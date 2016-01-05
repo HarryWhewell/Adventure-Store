@@ -19,17 +19,20 @@
             <!--TODO angular rating filter-->
         </div>
         <div class="col-md-9">
+
             <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="apparel in vm.apparelList">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/320x150" alt="">
-                    <div class="caption">
-                        <h4 class="pull-right">{{apparel.price | currency :"£" }}</h4>
-                        <h4>{{apparel.name}}</h4>
-                        <p>{{apparel.desc}}</p>
-                        <input type="hidden" value="{{apparel.id}}" >
-                        <em class="pull-right">Armour: {{apparel.armour}}</em>
+                <a ng-href="#/apparel/{{apparel.id}}">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/320x150" alt="">
+                        <div class="caption">
+                            <h4 class="pull-right">{{apparel.price | currency :"£" }}</h4>
+                            <h4>{{apparel.name}}</h4>
+                            <p>{{apparel.desc}}</p>
+                            <input type="hidden" value="{{apparel.id}}" >
+                            <em class="pull-right">Armour: {{apparel.armour}}</em>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>

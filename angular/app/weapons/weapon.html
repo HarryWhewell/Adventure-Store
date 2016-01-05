@@ -20,15 +20,17 @@
         </div>
         <div class="col-md-9">
             <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="weapon in vm.weaponList">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/320x150" alt="">
-                    <div class="caption">
-                        <h4 class="pull-right">{{weapon.price | currency :"£" }}</h4>
-                        <h4>{{weapon.name}}</h4>
-                        <p>{{weapon.desc}}</p>
-                        <em class="pull-right">Damage: {{weapon.damage}}</em>
+                <a ng-href="#/weapons/item/{{weapon.ref}}">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/320x150" alt="">
+                        <div class="caption">
+                            <h4 class="pull-right">{{weapon.price | currency :"£" }}</h4>
+                            <h4>{{weapon.name}}</h4>
+                            <p>{{weapon.desc}}</p>
+                            <em class="pull-right">Damage: {{weapon.damage}}</em>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>
