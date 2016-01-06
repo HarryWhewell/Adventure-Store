@@ -9,7 +9,8 @@
             'app.services',
             'app.directives',
             'app.config',
-            'ngRoute'
+            'ngRoute',
+            'ui.bootstrap'
         ]);
 
     angular.module('app.controllers', []);

@@ -9,7 +9,8 @@
             'app.services',
             'app.directives',
             'app.config',
-            'ngRoute'
+            'ngRoute',
+            'ui.bootstrap'
         ]);
 
     angular.module('app.controllers', []);
@@ -457,31 +458,6 @@
  */
 
 /**
- * angular/app/apparel/apparel.js
- * Created by HWhewell on 15/12/2015.
- */
-(function(){
-
-    angular
-        .module('app.controllers')
-        .controller('ApparelController', ApparelController);
-
-    ApparelController.$inject = ['ApparelService'];
-
-    function ApparelController(ApparelService){
-        var vm = this;
-
-        vm.apparelList = vm.getApparel;
-
-        vm.getApparel = ApparelService.getAllApparel(function(success){
-            vm.apparelList = success.data;
-        },function(error){
-            vm.apparelList = error;
-        });
-    }
-
-}());
-/**
  * angular/app/apparelItem/apparelItem.js
  * Created by HWhewell on 05/01/2016.
  */
@@ -510,6 +486,31 @@
 
         },function(error){
             vm.getApparel = error;
+        });
+    }
+
+}());
+/**
+ * angular/app/apparel/apparel.js
+ * Created by HWhewell on 15/12/2015.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('ApparelController', ApparelController);
+
+    ApparelController.$inject = ['ApparelService'];
+
+    function ApparelController(ApparelService){
+        var vm = this;
+
+        vm.apparelList = vm.getApparel;
+
+        vm.getApparel = ApparelService.getAllApparel(function(success){
+            vm.apparelList = success.data;
+        },function(error){
+            vm.apparelList = error;
         });
     }
 
@@ -640,7 +641,7 @@
             vm.weaponType = vm.getWeapon.type;
             vm.weaponName = vm.getWeapon.name;
             vm.weaponDesc = vm.getWeapon.desc;
-            vm.weaponArmour = vm.getWeapon.damage;
+            vm.weaponDamage = vm.getWeapon.damage;
             vm.weaponPrice = vm.getWeapon.price;
             vm.weaponQuantity = vm.getWeapon.quantity;
 

@@ -21,7 +21,7 @@
             vm.weaponType = vm.getWeapon.type;
             vm.weaponName = vm.getWeapon.name;
             vm.weaponDesc = vm.getWeapon.desc;
-            vm.weaponArmour = vm.getWeapon.damage;
+            vm.weaponDamage = vm.getWeapon.damage;
             vm.weaponPrice = vm.getWeapon.price;
             vm.weaponQuantity = vm.getWeapon.quantity;
 

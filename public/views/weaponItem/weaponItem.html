@@ -4,11 +4,31 @@
         <div class="caption-full">
             <h4 class="pull-right">{{vm.weaponPrice| currency :"£" }}</h4>
             <h4>{{vm.weaponName}}</h4>
+            <em>{{vm.weaponDesc}}</em>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
                 dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip
                 ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
                 fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
                 mollit anim id est laborum</p>
+            <h4>Highlights</h4>
+            <ul>
+                <li>Type: {{vm.weaponType}}</li>
+                <li>Damage: {{vm.weaponDamage}}</li>
+            </ul>
+            <div ng-show="vm.weaponQuantity == 0" class="text-danger"><p>Out of Stock!</p></div>
+            <div ng-show="vm.weaponQuantity > 0"><p>Units left: {{vm.weaponQuantity}}</p>
+                <p>
+                    Quantity: <select>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                </select>
+                </p>
+                <button class="btn btn-primary">Add to Order</button>
+            </div>
         </div>
     </div>
 </div>
