@@ -12,7 +12,7 @@
                 <a href="#" class="list-group-item">Mage</a>
             </div>
             <h4>Price</h4>
-            <!--TODO jquery value slider-->
+
             <h4>Armour</h4>
             <!--TODO jquery value slider-->
             <h4>Rating</h4>
@@ -23,7 +23,7 @@
             <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="apparel in vm.apparelList">
                 <a ng-href="#/apparel/{{apparel.id}}">
                     <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
+                        <img ng-src="{{apparel.imageUrl}}" alt="" style="height: 250px; width: 320px">
                         <div class="caption">
                             <h4 class="pull-right">{{apparel.price | currency :"£" }}</h4>
                             <h4>{{apparel.name}}</h4>

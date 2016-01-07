@@ -458,6 +458,31 @@
  */
 
 /**
+ * angular/app/apparel/apparel.js
+ * Created by HWhewell on 15/12/2015.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('ApparelController', ApparelController);
+
+    ApparelController.$inject = ['ApparelService'];
+
+    function ApparelController(ApparelService) {
+        var vm = this;
+
+        vm.apparelList = vm.getApparel;
+
+        vm.getApparel = ApparelService.getAllApparel(function (success) {
+            vm.apparelList = success.data;
+        }, function (error) {
+            vm.apparelList = error;
+        });
+
+    }
+}());
+/**
  * angular/app/apparelItem/apparelItem.js
  * Created by HWhewell on 05/01/2016.
  */
@@ -491,31 +516,6 @@
 
 }());
 /**
- * angular/app/apparel/apparel.js
- * Created by HWhewell on 15/12/2015.
- */
-(function(){
-
-    angular
-        .module('app.controllers')
-        .controller('ApparelController', ApparelController);
-
-    ApparelController.$inject = ['ApparelService'];
-
-    function ApparelController(ApparelService){
-        var vm = this;
-
-        vm.apparelList = vm.getApparel;
-
-        vm.getApparel = ApparelService.getAllApparel(function(success){
-            vm.apparelList = success.data;
-        },function(error){
-            vm.apparelList = error;
-        });
-    }
-
-}());
-/**
  * angular/app/home/home.js
  * Created by HWhewell on 07/12/2015.
  */
@@ -542,6 +542,9 @@
 
     function LoginController(){
         var vm = this;
+        vm.login = function(credentials){
+            //TODO Add login functionality
+        }
     }
 
 }());

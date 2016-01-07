@@ -10,6 +10,9 @@
 
     function LoginController(){
         var vm = this;
+        vm.login = function(credentials){
+            //TODO Add login functionality
+        }
     }
 
 }());

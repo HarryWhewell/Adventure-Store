@@ -10,14 +10,21 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <form accept-charset="UTF-8" role="form" class="form-signin">
+                    <form accept-charset="UTF-8" role="form" class="form-signin"
+                            ng-submit="vm.login(credentials)" novalidate>
                         <fieldset>
+
                             <label for="email">Email:</label>
-                            <input class="form-control" placeholder="Email" id="email" type="text">
+                            <input class="form-control" placeholder="Email" id="email"
+                                   ng-model="credentials.email" type="text">
+
                             <label for="password">Password:</label>
-                            <input class="form-control" placeholder="Password" id="password" type="password">
-                            </br>
+                            <input class="form-control" placeholder="Password" id="password"
+                                   ng-model="credentials.password" type="password">
+
+                            <br>
                             <input class="btn btn-lg btn-primary btn-block" type="submit" id="login" value="Login »">
+
                         </fieldset>
                     </form>
                 </div>

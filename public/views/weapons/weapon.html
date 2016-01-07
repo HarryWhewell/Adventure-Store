@@ -22,7 +22,7 @@
             <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="weapon in vm.weaponList">
                 <a ng-href="#/weapons/{{weapon.id}}">
                     <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
+                        <img ng-src="{{weapon.imageUrl}}" alt="" style="height: 250px; width: 320px">
                         <div class="caption">
                             <h4 class="pull-right">{{weapon.price | currency :"£" }}</h4>
                             <h4>{{weapon.name}}</h4>

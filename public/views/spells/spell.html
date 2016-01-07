@@ -16,7 +16,7 @@
             <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="spell in vm.spellList">
                 <a ng-href="#/spells/{{spell.id}}">
                     <div class="thumbnail">
-                        <img src="http://placehold.it/320x150" alt="">
+                        <img ng-src="{{spell.imageUrl}}" alt="" style="height: 250px; width: 320px">
                         <div class="caption">
                             <h4 class="pull-right">{{spell.price | currency :"£" }}</h4>
                             <h4>{{spell.name}}</h4>

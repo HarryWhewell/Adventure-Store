@@ -10,16 +10,16 @@
 
     ApparelController.$inject = ['ApparelService'];
 
-    function ApparelController(ApparelService){
+    function ApparelController(ApparelService) {
         var vm = this;
 
         vm.apparelList = vm.getApparel;
 
-        vm.getApparel = ApparelService.getAllApparel(function(success){
+        vm.getApparel = ApparelService.getAllApparel(function (success) {
             vm.apparelList = success.data;
-        },function(error){
+        }, function (error) {
             vm.apparelList = error;
         });
-    }
 
+    }
 }());
