@@ -42,6 +42,10 @@
         vm.isAuthed = function () {
             return AuthService.isAuthed ? AuthService.isAuthed() : false
         };
+
+        vm.isAdmin = function() {
+            return AuthService.isAdmin ? AuthService.isAdmin() : false
+        };
     }
 }());
 /**
@@ -52,7 +56,10 @@
 
     angular
         .module('app.config')
-        .config(Route);
+        .config(Route)
+        .run(RouteInterceptor);
+
+    RouteInterceptor.$inject = ['$rootScope', '$location', 'AuthService'];
 
     function Route($routeProvider, $locationProvider){
 
@@ -94,6 +101,42 @@
                 controller: 'SpellItemController as vm'
             })
 
+            .when('/admin',{
+                templateUrl: 'public/views/admin/admin.html',
+                controller: 'AdminController as vm',
+                requiresAdmin: true
+            })
+
+            .when('/order',{
+                templateUrl: 'public/views/order/order.html',
+                controller: 'OrderController as vm',
+                requiresLogin: true
+            })
+            .otherwise({redirectTo: '/'});
+
+
+    }
+
+    function RouteInterceptor($rootScope, $location, AuthService){
+        $rootScope.$on('$routeChangeStart', function(event, next){
+            var authenticated = AuthService.isAuthed();
+            var admin = AuthService.isAdmin();
+            if(next.requiresLogin){
+                if(!authenticated){
+                    event.preventDefault();
+                    $location.path('/');
+                }
+            }
+
+            if(next.requiresAdmin){
+                if(!admin){
+                    event.preventDefault();
+                    $location.path('/');
+                }
+            }
+
+
+        })
     }
 }());
 /**
@@ -260,6 +303,14 @@
             } else {
                 return false;
             }
+        };
+
+        vm.getTokenName = function(){
+          var token = vm.getToken();
+          if(token){
+              var params = vm.parseJwt(token);
+              return params.name;
+          }
         };
 
         // logs out user
@@ -626,7 +677,17 @@
  * angular/app/admin/admin.js
  * Created by HWhewell on 16/12/2015.
  */
+(function(){
 
+    angular
+        .module('app.controllers')
+        .controller('AdminController', AdminController);
+
+    function AdminController(){
+        var vm = this;
+    }
+
+}());
 /**
  * angular/app/apparel/apparel.js
  * Created by HWhewell on 15/12/2015.
@@ -700,9 +761,7 @@
     function HomeController(AuthService){
         var vm = this;
 
-        vm.isAuthed = function () {
-            return AuthService.isAuthed ? AuthService.isAuthed() : false
-        };
+        vm.userName = AuthService.getTokenName();
     }
 
 }());
@@ -734,22 +793,6 @@
                 window.alert('Something Went Wrong!')
             })
         }
-    }
-
-}());
-/**
- * angular/app/order/order.js
- * Created by HWhewell on 04/01/2016.
- */
-(function(){
-
-    angular
-        .module('app.controllers')
-        .controller('OrderController', OrderController);
-
-    function OrderController() {
-        var vm = this;
-
     }
 
 }());
@@ -865,6 +908,22 @@
         },function(error){
             vm.weaponList = error;
         });
+    }
+
+}());
+/**
+ * angular/app/order/order.js
+ * Created by HWhewell on 04/01/2016.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('OrderController', OrderController);
+
+    function OrderController() {
+        var vm = this;
+
     }
 
 }());

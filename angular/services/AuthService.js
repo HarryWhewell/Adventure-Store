@@ -59,6 +59,14 @@
             }
         };
 
+        vm.getTokenName = function(){
+          var token = vm.getToken();
+          if(token){
+              var params = vm.parseJwt(token);
+              return params.name;
+          }
+        };
+
         // logs out user
         vm.logout = function() {
             $window.localStorage.removeItem('jwtToken');

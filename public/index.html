@@ -46,6 +46,12 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right ">
                     <li>
+                        <a ng-show="vm.isAuthed()" style="color: #808080;" href="#/order">Order</a>
+                    </li>
+                    <li>
+                        <a ng-show="vm.isAdmin()" style="color: #808080;" href="#/admin">Admin</a>
+                    </li>
+                    <li>
                         <a ng-hide="vm.isAuthed()" style="color: #808080;" href="#/login">Login</a>
                     </li>
                     <li>

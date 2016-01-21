@@ -6,7 +6,10 @@
 
     angular
         .module('app.config')
-        .config(Route);
+        .config(Route)
+        .run(RouteInterceptor);
+
+    RouteInterceptor.$inject = ['$rootScope', '$location', 'AuthService'];
 
     function Route($routeProvider, $locationProvider){
 
@@ -48,5 +51,41 @@
                 controller: 'SpellItemController as vm'
             })
 
+            .when('/admin',{
+                templateUrl: 'public/views/admin/admin.html',
+                controller: 'AdminController as vm',
+                requiresAdmin: true
+            })
+
+            .when('/order',{
+                templateUrl: 'public/views/order/order.html',
+                controller: 'OrderController as vm',
+                requiresLogin: true
+            })
+            .otherwise({redirectTo: '/'});
+
+
+    }
+
+    function RouteInterceptor($rootScope, $location, AuthService){
+        $rootScope.$on('$routeChangeStart', function(event, next){
+            var authenticated = AuthService.isAuthed();
+            var admin = AuthService.isAdmin();
+            if(next.requiresLogin){
+                if(!authenticated){
+                    event.preventDefault();
+                    $location.path('/');
+                }
+            }
+
+            if(next.requiresAdmin){
+                if(!admin){
+                    event.preventDefault();
+                    $location.path('/');
+                }
+            }
+
+
+        })
     }
 }());

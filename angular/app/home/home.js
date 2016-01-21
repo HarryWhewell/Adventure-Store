@@ -13,9 +13,7 @@
     function HomeController(AuthService){
         var vm = this;
 
-        vm.isAuthed = function () {
-            return AuthService.isAuthed ? AuthService.isAuthed() : false
-        };
+        vm.userName = AuthService.getTokenName();
     }
 
 }());
