@@ -8,10 +8,23 @@
         .module('app.controllers')
         .controller('LoginController', LoginController);
 
-    function LoginController(){
+    LoginController.$inject = ['UserService','$location'];
+
+    function LoginController(UserService, $location){
         var vm = this;
-        vm.login = function(credentials){
-            //TODO Add login functionality
+        vm.login = function(){
+            var data = {email: vm.email, password: vm.password};
+            UserService.login(data, function(res){
+                if(res.data.success == true){
+                    $location.path('/');
+                }
+                else{
+                    window.alert('Wrong Login Credentials!')
+                }
+            },function(error){
+                console.log(error);
+                window.alert('Something Went Wrong!')
+            })
         }
     }
 

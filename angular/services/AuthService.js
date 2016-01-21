@@ -10,7 +10,7 @@
 
     authService.$inject = ['$window','$location'];
 
-    function authService(){
+    function authService($window, $location){
         var vm = this;
 
         // decode jwt

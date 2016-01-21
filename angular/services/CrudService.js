@@ -29,7 +29,16 @@
         };
 
         crudService.postRequest = function (url, data, success, error) {
-            return $http({method: 'POST', url: url, data: data}).
+            return $http({method: 'POST',
+                url: url,
+                headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var ref in obj)
+                        str.push(encodeURIComponent(ref) + "=" + encodeURIComponent(obj[ref]));
+                    return str.join("&");
+                },
+                data: data}).
                 then(function successCallback(data, status) {
                     success(data, status);
                     return data;

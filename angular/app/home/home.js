@@ -8,8 +8,14 @@
         .module('app.controllers')
         .controller('HomeController', HomeController);
 
-    function HomeController(){
+    HomeController.$inject = ['AuthService'];
+
+    function HomeController(AuthService){
         var vm = this;
+
+        vm.isAuthed = function () {
+            return AuthService.isAuthed ? AuthService.isAuthed() : false
+        };
     }
 
 }());

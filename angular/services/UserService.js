@@ -14,7 +14,7 @@
         var userService = {};
 
         // get all users
-        userService.getAllReviews = function(success, error){
+        userService.getAllUsers = function(success, error){
             return CrudService.getRequest('http://localhost:8080/api/users/', success, error);
         };
 
@@ -29,7 +29,7 @@
         };
 
         // get user by email
-        userService.getReviewByProductRef = function(email, success, error){
+        userService.getUserByEmail = function(email, success, error){
             return CrudService.getRequest('http://localhost:8080/api/users/email/' + email, success, error);
         };
 
@@ -41,6 +41,11 @@
         // delete user by id
         userService.deleteUserById = function(id, success, error){
             return CrudService.deleteRequest('http://localhost:8080/api/users/' + id, success, error);
+        };
+
+        // login user
+        userService.login = function(data, success, error){
+            return CrudService.postRequest('http://localhost:8080/api/auth/', data, success, error)
         };
 
         return userService;

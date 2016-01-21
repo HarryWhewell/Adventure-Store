@@ -7,6 +7,7 @@
         .module('app', [
             'app.controllers',
             'app.services',
+            'app.factories',
             'app.directives',
             'app.config',
             'ngRoute',
@@ -15,8 +16,33 @@
 
     angular.module('app.controllers', []);
     angular.module('app.services', []);
+    angular.module('app.factories', []);
     angular.module('app.directives', []);
     angular.module('app.config', ['ngRoute']);
+}());
+/**
+ * angular/MainController.js
+ * Created by HWhewell on 21/01/2016.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('MainController', MainController);
+
+    MainController.$inject = ['AuthService'];
+
+    function MainController(AuthService){
+        vm = this;
+
+        vm.logout = function(){
+            AuthService.logout && AuthService.logout()
+        };
+
+        vm.isAuthed = function () {
+            return AuthService.isAuthed ? AuthService.isAuthed() : false
+        };
+    }
 }());
 /**
  * angular/routes.js
@@ -68,6 +94,68 @@
                 controller: 'SpellItemController as vm'
             })
 
+    }
+}());
+/**
+ * angular/config/authConfig.js
+ * Created by HWhewell on 20/01/2016.
+ */
+(function(){
+    angular
+        .module('app.config')
+        .config(authConfig);
+
+
+    function authConfig($httpProvider){
+        $httpProvider.defaults.headers.common = {};
+        $httpProvider.defaults.headers.post = {};
+        $httpProvider.defaults.headers.put = {};
+        $httpProvider.defaults.headers.patch = {};
+
+        $httpProvider.interceptors.push('authInterceptor');
+    }
+}());
+/**
+ * angular/factories/authInterceptors.js
+ * Created by HWhewell on 20/01/2016.
+ */
+(function(){
+    angular
+        .module('app.factories')
+        .factory('authInterceptor', authInterceptor);
+
+    authInterceptor.$inject = [ 'AuthService', '$location'];
+
+    function authInterceptor(AuthService, $location){
+        return {
+            // automatically attach Authorization header
+            request: function(config) {
+
+                var token = AuthService.getToken();
+                if(config.url.indexOf('http://localhost:8080/api') === 0 && token) {
+                    config.headers.Authorization = 'Bearer ' + token;
+                }
+
+                return config;
+            },
+
+            // If a token was sent back, save it
+            response: function(res) {
+
+                if(res.config.url.indexOf('http://localhost:8080/api') === 0 && res.data.token) {
+                    AuthService.saveToken(res.data.token);
+                }
+                return res;
+            },
+
+            responseError: function(rejection){
+                if(rejection.status === 401 || rejection.status === 403){
+                    console.log('Response Error 401', rejection);
+                    $location.path('#/');
+                }
+                return rejection;
+            }
+        }
     }
 }());
 /**
@@ -125,7 +213,7 @@
 
     authService.$inject = ['$window','$location'];
 
-    function authService(){
+    function authService($window, $location){
         var vm = this;
 
         // decode jwt
@@ -212,7 +300,16 @@
         };
 
         crudService.postRequest = function (url, data, success, error) {
-            return $http({method: 'POST', url: url, data: data}).
+            return $http({method: 'POST',
+                url: url,
+                headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+                transformRequest: function(obj) {
+                    var str = [];
+                    for(var ref in obj)
+                        str.push(encodeURIComponent(ref) + "=" + encodeURIComponent(obj[ref]));
+                    return str.join("&");
+                },
+                data: data}).
                 then(function successCallback(data, status) {
                     success(data, status);
                     return data;
@@ -445,7 +542,7 @@
         var userService = {};
 
         // get all users
-        userService.getAllReviews = function(success, error){
+        userService.getAllUsers = function(success, error){
             return CrudService.getRequest('http://localhost:8080/api/users/', success, error);
         };
 
@@ -460,7 +557,7 @@
         };
 
         // get user by email
-        userService.getReviewByProductRef = function(email, success, error){
+        userService.getUserByEmail = function(email, success, error){
             return CrudService.getRequest('http://localhost:8080/api/users/email/' + email, success, error);
         };
 
@@ -472,6 +569,11 @@
         // delete user by id
         userService.deleteUserById = function(id, success, error){
             return CrudService.deleteRequest('http://localhost:8080/api/users/' + id, success, error);
+        };
+
+        // login user
+        userService.login = function(data, success, error){
+            return CrudService.postRequest('http://localhost:8080/api/auth/', data, success, error)
         };
 
         return userService;
@@ -593,8 +695,14 @@
         .module('app.controllers')
         .controller('HomeController', HomeController);
 
-    function HomeController(){
+    HomeController.$inject = ['AuthService'];
+
+    function HomeController(AuthService){
         var vm = this;
+
+        vm.isAuthed = function () {
+            return AuthService.isAuthed ? AuthService.isAuthed() : false
+        };
     }
 
 }());
@@ -608,10 +716,23 @@
         .module('app.controllers')
         .controller('LoginController', LoginController);
 
-    function LoginController(){
+    LoginController.$inject = ['UserService','$location'];
+
+    function LoginController(UserService, $location){
         var vm = this;
-        vm.login = function(credentials){
-            //TODO Add login functionality
+        vm.login = function(){
+            var data = {email: vm.email, password: vm.password};
+            UserService.login(data, function(res){
+                if(res.data.success == true){
+                    $location.path('/');
+                }
+                else{
+                    window.alert('Wrong Login Credentials!')
+                }
+            },function(error){
+                console.log(error);
+                window.alert('Something Went Wrong!')
+            })
         }
     }
 

@@ -13,18 +13,14 @@
                     <form accept-charset="UTF-8" role="form" class="form-signin"
                             ng-submit="vm.login()" novalidate>
                         <fieldset>
-
                             <label for="email">Email:</label>
                             <input class="form-control" placeholder="Email" id="email"
-                                   ng-model="credentials.email" type="text">
-
+                                   ng-model="vm.email" type="text">
                             <label for="password">Password:</label>
                             <input class="form-control" placeholder="Password" id="password"
-                                   ng-model="credentials.password" type="password">
-
+                                   ng-model="vm.password" type="password">
                             <br>
-                            <input class="btn btn-lg btn-primary btn-block" type="submit" id="login" value="Login »">
-
+                            <input class="btn btn-lg btn-primary btn-block" type="submit" id="login" value="Login">
                         </fieldset>
                     </form>
                 </div>

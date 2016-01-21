@@ -7,6 +7,7 @@
         .module('app', [
             'app.controllers',
             'app.services',
+            'app.factories',
             'app.directives',
             'app.config',
             'ngRoute',
@@ -15,6 +16,7 @@
 
     angular.module('app.controllers', []);
     angular.module('app.services', []);
+    angular.module('app.factories', []);
     angular.module('app.directives', []);
     angular.module('app.config', ['ngRoute']);
 }());
