@@ -159,6 +159,23 @@
     }
 }());
 /**
+ * angular/directives/reviewSection.js
+ * Created by HWhewell on 22/01/2016.
+ */
+(function(){
+
+    angular
+        .module('app.directives')
+        .directive('reviewSection', ReviewSection);
+
+    function ReviewSection(){
+        return {
+            restrict: 'E',
+            templateUrl: 'public/views/review/review-section.html'
+        };
+    }
+}());
+/**
  * angular/factories/authInterceptors.js
  * Created by HWhewell on 20/01/2016.
  */
@@ -797,6 +814,42 @@
 
 }());
 /**
+ * angular/app/order/order.js
+ * Created by HWhewell on 04/01/2016.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('OrderController', OrderController);
+
+    function OrderController() {
+        var vm = this;
+
+    }
+
+}());
+/**
+ * angular/directives/review.js
+ * Created by HWhewell on 22/01/2016.
+ */
+(function(){
+
+    angular
+        .module('app.controllers')
+        .controller('ReviewController', ReviewController);
+
+    ReviewController.$inject = ['ReviewService','AuthService'];
+
+    function ReviewController(ReviewService, AuthService){
+        vm = this;
+
+        vm.isAuthed = function () {
+            return AuthService.isAuthed ? AuthService.isAuthed() : false
+        };
+    }
+}());
+/**
  * angular/app/spellItem/spellItem.js
  * Created by HWhewell on 04/01/2016.
  */
@@ -908,22 +961,6 @@
         },function(error){
             vm.weaponList = error;
         });
-    }
-
-}());
-/**
- * angular/app/order/order.js
- * Created by HWhewell on 04/01/2016.
- */
-(function(){
-
-    angular
-        .module('app.controllers')
-        .controller('OrderController', OrderController);
-
-    function OrderController() {
-        var vm = this;
-
     }
 
 }());

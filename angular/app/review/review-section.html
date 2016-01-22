@@ -1,0 +1,45 @@
+<br>
+<div ng-controller="ReviewController as vm">
+    <div class="panel">
+        <div class="panel-heading">
+            <div>
+                <center><h3>Reviews</h3></center>
+            </div>
+        </div>
+        <div class="panel-body">
+            <blockquote>
+                <b>Stars:</b><br>
+                <p><!--Body--></p><br>
+                <cite>by: </cite><br>
+            </blockquote>
+        </div>
+    </div>
+    <div class="panel panel-default" ng-show="vm.isAuthed()">
+        <div class="panel-heading">
+            <div>
+                <center><h3>Add Review</h3></center>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form name="reviewForm" novalidate>
+                <fieldset class="form-group">
+                    <label for="review-star">Stars:</label>
+                    <select class="form-control" id="review-star" required>
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="5">5 Stars</option>
+                    </select>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label for="review-body">Review:</label>
+                    <textarea class="form-control" id="review-body" required></textarea>
+                </fieldset>
+                <fieldset class="form-group">
+                    <input type="submit" class="btn btn-primary pull-right" value="Submit" />
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
