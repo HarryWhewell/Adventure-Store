@@ -76,7 +76,7 @@
                 templateUrl: 'public/views/weapons/weapon.html',
                 controller: 'WeaponController as vm'
             })
-            .when('/weapons/:weaponId',{
+            .when('/weapons/:ref',{
                 templateUrl: 'public/views/weaponItem/weaponItem.html',
                 controller: 'WeaponItemController as vm'
             })
@@ -86,7 +86,7 @@
                 controller: 'ApparelController as vm'
             })
 
-            .when('/apparel/:apparelId',{
+            .when('/apparel/:ref',{
                 templateUrl: 'public/views/apparelItem/apparelItem.html',
                 controller: 'ApparelItemController as vm'
             })
@@ -96,7 +96,7 @@
                 controller: 'SpellController as vm'
             })
 
-            .when('/spells/:spellId',{
+            .when('/spells/:ref',{
                 templateUrl: 'public/views/spellItem/spellItem.html',
                 controller: 'SpellItemController as vm'
             })
@@ -112,7 +112,7 @@
                 controller: 'OrderController as vm',
                 requiresLogin: true
             })
-            .otherwise({redirectTo: '/'});
+
 
 
     }
@@ -171,6 +171,8 @@
     function ReviewSection(){
         return {
             restrict: 'E',
+            controller: 'ReviewController as review',
+            bindToController: true,
             templateUrl: 'public/views/review/review-section.html'
         };
     }
@@ -248,6 +250,11 @@
             return CrudService.getRequest('http://localhost:8080/api/apparel/' + id, success, error);
         };
 
+        // get apparel by ref
+        apparelService.getApparelByRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/apparel/ref/' + ref, success, error);
+        };
+
         // update apparel by id
         apparelService.updateApparelById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/apparel/' + id, data, success, error);
@@ -280,7 +287,6 @@
         vm.parseJwt = function(token) {
             var base64Url = token.split('.')[1];
             var base64 = base64Url.replace('-', '+').replace('_', '/');
-            console.log('JSON: ',JSON.parse($window.atob(base64)));
             return JSON.parse($window.atob(base64));
         };
 
@@ -534,8 +540,8 @@
         };
 
         // get review by product ref
-        reviewService.getReviewByProductRef = function(ref, success, error){
-            return CrudService.getRequest('http://localhost:8080/api/reviews/product/' + ref, success, error);
+        reviewService.getReviewByRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/reviews/ref/' + ref, success, error);
         };
 
         // update review by id
@@ -579,6 +585,11 @@
         // get spell by id
         spellService.getSpellById = function(id, success, error){
             return CrudService.getRequest('http://localhost:8080/api/spells/' + id, success, error);
+        };
+
+        // get spell by ref
+        spellService.getSpellByRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/spells/ref/' + ref, success, error);
         };
 
         // update spell by id
@@ -677,6 +688,11 @@
             return CrudService.getRequest('http://localhost:8080/api/weapons/' + id, success, error);
         };
 
+        // get weapon by ref
+        weaponService.getWeaponByRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/weapons/ref/' + ref, success, error);
+        };
+
         // update weapon by id
         weaponService.updateWeaponById = function(id, data, success, error){
             return CrudService.putRequest('http://localhost:8080/api/weapons/' + id, data, success, error);
@@ -745,9 +761,9 @@
     function ApparelItemController($routeParams, ApparelService) {
         var vm = this;
 
-        vm.item_id = $routeParams.apparelId;
+        vm.item_ref = $routeParams.ref;
 
-        vm.getApparel = ApparelService.getApparelById(vm.item_id, function(success){
+        vm.getApparel = ApparelService.getApparelByRef(vm.item_ref, function(success){
             vm.getApparel = success.data;
 
             vm.apparelType = vm.getApparel.type;
@@ -760,6 +776,7 @@
         },function(error){
             vm.getApparel = error;
         });
+
     }
 
 }());
@@ -839,14 +856,38 @@
         .module('app.controllers')
         .controller('ReviewController', ReviewController);
 
-    ReviewController.$inject = ['ReviewService','AuthService'];
+    ReviewController.$inject = ['$routeParams','ReviewService','AuthService'];
 
-    function ReviewController(ReviewService, AuthService){
+    function ReviewController($routeParams, ReviewService, AuthService){
         vm = this;
+
+        vm.item_ref = $routeParams.ref;
 
         vm.isAuthed = function () {
             return AuthService.isAuthed ? AuthService.isAuthed() : false
         };
+
+        vm.reviewList = vm.getReviews;
+
+        vm.getReviews = ReviewService.getReviewByRef(vm.item_ref, function(res){
+                vm.reviewList = res.data;
+                console.log(vm.reviewList);
+            }, function(err){
+                console.log('Error: ' + err);
+
+            });
+
+        vm.makeReview = function(){
+            vm.author = AuthService.getTokenName();
+            data = {product_ref: vm.item_ref, stars: vm.stars, body: vm.body, author: vm.author };
+            ReviewService.createReview(data, function(res){
+                vm.body = "";
+                window.alert('Review Added!');
+            },function(err){
+
+            })
+        }
+
     }
 }());
 /**
@@ -864,9 +905,9 @@
     function SpellItemController($routeParams, SpellService) {
         var vm = this;
 
-        vm.item_id = $routeParams.spellId;
+        vm.item_ref = $routeParams.ref;
 
-        vm.getSpell = SpellService.getSpellById(vm.item_id, function(success){
+        vm.getSpell = SpellService.getSpellByRef(vm.item_ref, function(success){
             vm.getSpell = success.data;
 
             vm.spellName = vm.getSpell.name;
@@ -921,9 +962,9 @@
     function WeaponItemController($routeParams, WeaponService) {
         var vm = this;
 
-        vm.item_id = $routeParams.weaponId;
+        vm.item_ref = $routeParams.ref;
 
-        vm.getWeapon = WeaponService.getWeaponById(vm.item_id, function(success){
+        vm.getWeapon = WeaponService.getWeaponByRef(vm.item_ref, function(success){
             vm.getWeapon = success.data;
 
             vm.weaponType = vm.getWeapon.type;

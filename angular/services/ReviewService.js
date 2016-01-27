@@ -29,8 +29,8 @@
         };
 
         // get review by product ref
-        reviewService.getReviewByProductRef = function(ref, success, error){
-            return CrudService.getRequest('http://localhost:8080/api/reviews/product/' + ref, success, error);
+        reviewService.getReviewByRef = function(ref, success, error){
+            return CrudService.getRequest('http://localhost:8080/api/reviews/ref/' + ref, success, error);
         };
 
         // update review by id

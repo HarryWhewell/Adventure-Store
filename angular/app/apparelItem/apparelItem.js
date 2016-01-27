@@ -13,9 +13,9 @@
     function ApparelItemController($routeParams, ApparelService) {
         var vm = this;
 
-        vm.item_id = $routeParams.apparelId;
+        vm.item_ref = $routeParams.ref;
 
-        vm.getApparel = ApparelService.getApparelById(vm.item_id, function(success){
+        vm.getApparel = ApparelService.getApparelByRef(vm.item_ref, function(success){
             vm.getApparel = success.data;
 
             vm.apparelType = vm.getApparel.type;
@@ -28,6 +28,7 @@
         },function(error){
             vm.getApparel = error;
         });
+
     }
 
 }());

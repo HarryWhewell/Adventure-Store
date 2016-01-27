@@ -26,7 +26,7 @@
                 templateUrl: 'public/views/weapons/weapon.html',
                 controller: 'WeaponController as vm'
             })
-            .when('/weapons/:weaponId',{
+            .when('/weapons/:ref',{
                 templateUrl: 'public/views/weaponItem/weaponItem.html',
                 controller: 'WeaponItemController as vm'
             })
@@ -36,7 +36,7 @@
                 controller: 'ApparelController as vm'
             })
 
-            .when('/apparel/:apparelId',{
+            .when('/apparel/:ref',{
                 templateUrl: 'public/views/apparelItem/apparelItem.html',
                 controller: 'ApparelItemController as vm'
             })
@@ -46,7 +46,7 @@
                 controller: 'SpellController as vm'
             })
 
-            .when('/spells/:spellId',{
+            .when('/spells/:ref',{
                 templateUrl: 'public/views/spellItem/spellItem.html',
                 controller: 'SpellItemController as vm'
             })
@@ -62,7 +62,7 @@
                 controller: 'OrderController as vm',
                 requiresLogin: true
             })
-            .otherwise({redirectTo: '/'});
+
 
 
     }

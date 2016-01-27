@@ -11,6 +11,8 @@
     function ReviewSection(){
         return {
             restrict: 'E',
+            controller: 'ReviewController as review',
+            bindToController: true,
             templateUrl: 'public/views/review/review-section.html'
         };
     }

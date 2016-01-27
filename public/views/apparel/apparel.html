@@ -21,14 +21,13 @@
         <div class="col-md-9">
 
             <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="apparel in vm.apparelList">
-                <a ng-href="#/apparel/{{apparel.id}}">
+                <a ng-href="#/apparel/{{apparel.ref}}">
                     <div class="thumbnail">
                         <img ng-src="{{apparel.imageUrl}}" alt="" style="height: 250px; width: 320px">
                         <div class="caption">
                             <h4 class="pull-right">{{apparel.price | currency :"£" }}</h4>
                             <h4>{{apparel.name}}</h4>
                             <p>{{apparel.desc}}</p>
-                            <input type="hidden" value="{{apparel.id}}" >
                             <em class="pull-right">Armour: {{apparel.armour}}</em>
                         </div>
                     </div>

@@ -13,9 +13,9 @@
     function WeaponItemController($routeParams, WeaponService) {
         var vm = this;
 
-        vm.item_id = $routeParams.weaponId;
+        vm.item_ref = $routeParams.ref;
 
-        vm.getWeapon = WeaponService.getWeaponById(vm.item_id, function(success){
+        vm.getWeapon = WeaponService.getWeaponByRef(vm.item_ref, function(success){
             vm.getWeapon = success.data;
 
             vm.weaponType = vm.getWeapon.type;

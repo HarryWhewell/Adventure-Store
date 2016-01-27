@@ -13,9 +13,9 @@
     function SpellItemController($routeParams, SpellService) {
         var vm = this;
 
-        vm.item_id = $routeParams.spellId;
+        vm.item_ref = $routeParams.ref;
 
-        vm.getSpell = SpellService.getSpellById(vm.item_id, function(success){
+        vm.getSpell = SpellService.getSpellByRef(vm.item_ref, function(success){
             vm.getSpell = success.data;
 
             vm.spellName = vm.getSpell.name;
